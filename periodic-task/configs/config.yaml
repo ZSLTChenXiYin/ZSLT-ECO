@@ -1,0 +1,26 @@
+server:
+  http:
+    addr: 0.0.0.0:8000
+    timeout: 10s
+  grpc:
+    addr: 0.0.0.0:9000
+    timeout: 10s
+
+registry:
+  consul:
+    address:                                  # Consul服务地址
+      - 127.0.0.1:8500
+    scheme: http
+    health_check: /health                     # 健康检查端点
+    interval: 10s                             # 健康检查间隔（暂不可用）
+    timeout: 5s                               # 健康检查超时时间（暂不可用）
+    deregister_critical_service_after: true   # 是否在服务异常后自动注销（暂不可用）
+
+data:
+  database:
+    driver: mysql
+    source: username:password@tcp(127.0.0.1:3306)/periodic-task?parseTime=True&loc=Local
+  redis:
+    addr: 127.0.0.1:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s

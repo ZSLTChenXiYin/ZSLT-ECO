@@ -1,0 +1,54 @@
+syntax = "proto3";
+package kratos.api;
+
+option go_package = "periodic-task/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Server server = 1;
+  Registry registry = 2;
+  Data data = 3;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  HTTP http = 1;
+  GRPC grpc = 2;
+}
+
+message Registry {
+  message Consul {
+    repeated string address = 1;
+    string scheme = 2;
+    string health_check = 3; // 健康检查路径
+    google.protobuf.Duration interval = 4; // 健康检查间隔
+    google.protobuf.Duration timeout = 5;  // 健康检查超时
+    bool deregister_critical_service_after = 6; // 是否在服务异常后自动注销
+  }
+  Consul consul = 1;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+  }
+  message Redis {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration read_timeout = 3;
+    google.protobuf.Duration write_timeout = 4;
+  }
+  Database database = 1;
+  Redis redis = 2;
+}
