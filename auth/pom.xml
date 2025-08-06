@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zslt_official.zslt_eco</groupId>
+    <artifactId>auth</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>auth</name>
+    <description>auth</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <spring-boot.version>3.3.5</spring-boot.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+        <redisson.version>3.27.2</redisson.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <spotless-maven-plugin.version>2.22.1</spotless-maven-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <!--consul服务发现与注册-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
+        <!--consul动态配置-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-config</artifactId>
+        </dependency>
+        <!--boostrap-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!--配置变更后自动刷新-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-bus-amqp</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <!-- gRPC Spring Boot Starter -->
+        <dependency>
+            <groupId>net.devh</groupId>
+            <artifactId>grpc-server-spring-boot-starter</artifactId>
+            <version>2.15.0.RELEASE</version>
+        </dependency>
+
+        <!-- gRPC Protobuf -->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>1.58.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>protoc-gen-grpc-java</artifactId>
+            <version>1.74.0</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <version>1.58.0</version>
+        </dependency>
+        <!-- 用于生成 Java 代码的依赖 -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>4.31.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>${redisson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+            <exclusions>
+                <!-- 排除低版本的jackson -->
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <version>1.18.22</version>
+        </dependency>
+        <!-- Spring Boot 3 集成支持（必需） -->
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2-extension-spring6</artifactId>
+            <version>2.0.48</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 确保 gRPC 版本兼容 Spring Boot 3 -->
+        <dependency>
+            <groupId>net.devh</groupId>
+            <artifactId>grpc-server-spring-boot-starter</artifactId>
+            <version>3.1.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.7.0</version>
+            </extension>
+        </extensions>
+
+        <plugins>
+            <!-- Spring Boot Maven插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.zslt_official.zslt_eco.AuthApplication</mainClass>
+                    <!-- 替换为实际主类名 -->
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>${spotless-maven-plugin.version}</version>
+                <configuration>
+                    <java>
+                        <!--<eclipse>
+                            <file>${maven.multiModuleProjectDirectory}/format/short-link_spotless_formatter.xml</file>
+                        </eclipse>-->
+                    </java>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>apply</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: auth
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name} # 注册到Consul的服务名
+        healthCheckPath:  /actuator/health # 健康检查路径
+        health-check-interval: 10s # 健康检查间隔（暂不可用）
+        health-check-timeout: 5s # 健康检查超时时间（暂不可用）
+        health-check-critical-timeout: 30s # 下线30s后自动注销
+        tags:
+          - version=1.0.0
+      config:
+        profile-separator: '-' # 默认的分隔符为 ','
+        format: yaml # 配置文件格式
+        enabled: true
+        prefixes: # 配置文件前缀
+          - config
+        defaultContext: application # 默认上下文 如从config/application/下加载
+        watch:
+          enabled: true # 启用配置变更监听
+          delay: 1000 # 刷新延迟
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
