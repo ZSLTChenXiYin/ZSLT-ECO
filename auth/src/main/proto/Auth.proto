@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package api.auth.v1;
+
+option go_package = "auth/api/auth/v1;v1";
+option java_multiple_files = true;
+option java_package = "com.zslt_official.zslt_eco.grpc.v1.service";
+
+// 认证服务
+service AuthService {
+  // 获取Token
+  rpc GetToken (GetTokenRequest) returns (GetTokenResponse);
+
+  // 刷新Token
+  rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
+
+  // 撤销Token
+  rpc RevokeToken (RevokeTokenRequest) returns (RevokeTokenResponse);
+
+  // 验证Token
+  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
+}
+
+// 获取Token请求
+message GetTokenRequest {
+  string user_id = 1;
+  string server_name = 2;
+}
+
+// 获取Token响应
+message GetTokenResponse {
+  bool success = 1;
+  string message = 2;
+  string access_token = 3;
+  string refresh_token = 4;
+  string user_id = 5;
+}
+
+// 刷新Token请求
+message RefreshTokenRequest {
+  string refresh_token = 1;
+}
+
+// 刷新Token响应
+message RefreshTokenResponse {
+  bool success = 1;
+  string message = 2;
+  string access_token = 3;
+  string refresh_token = 4;
+}
+
+// 撤销Token请求
+message RevokeTokenRequest {
+  string user_id = 1;
+  string server_name = 2;
+  string token_category = 3; // "at" 或 "rt"
+}
+
+// 撤销Token响应
+message RevokeTokenResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// 验证Token请求
+message ValidateTokenRequest {
+  string token = 1;
+  string token_category = 2; // "at" 或 "rt"
+}
+
+// 验证Token响应
+message ValidateTokenResponse {
+  bool success = 1;
+  string message = 2;
+  bool valid = 3;
+  string user_id = 4;
+  string server_name = 5;
+}
