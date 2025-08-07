@@ -158,8 +158,8 @@ public class AuthGrpcServiceImpl extends AuthServiceGrpc.AuthServiceImplBase {
                     .setSuccess(true)
                     .setValid(true)
                     .setMessage(JwtEnum.SUCCESS_VALIDATE.getMessage())
-                    .setUserId(claims.get("user_id", String.class))
-                    .setServerName(claims.get("server_name", String.class))
+                    .setUserId(claims.get("userId", String.class))
+                    .setServerName(claims.get("serverName", String.class))
                     .build();
 
             responseObserver.onNext(response);
