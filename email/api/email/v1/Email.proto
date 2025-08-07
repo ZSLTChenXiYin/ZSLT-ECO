@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package api.email.v1;
+
+option go_package = "email/api/email/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.email.v1";
+
+message _Json {
+	bytes json = 1;
+}
+
+service Email {
+	rpc CreateEmail (CreateEmailRequest) returns (CreateEmailReply);
+	rpc CreateEmailTemplate (CreateEmailTemplateRequest) returns (CreateEmailTemplateReply);
+	rpc SendEmail (SendEmailRequest) returns (SendEmailReply);
+	rpc SendEmailWithTemplate (SendEmailWithTemplateRequest) returns (SendEmailWithTemplateReply);
+}
+
+message CreateEmailRequest {
+	string email = 1;
+	string password = 2;
+}
+message CreateEmailReply {
+	bool success = 1;
+}
+
+message CreateEmailTemplateRequest {
+	string name = 1;
+	_Json args = 2;
+	string content = 3;
+}
+message CreateEmailTemplateReply {
+	uint64 template_id = 1;
+}
+
+message SendEmailRequest {
+	uint64 template_id = 1;
+	string from = 2;
+	string to = 3;
+	string subject = 4;
+	bool use_default_args = 5;
+	_Json args = 6;
+}
+message SendEmailReply {
+	bool success = 1;
+}
+
+message SendEmailWithTemplateRequest {
+	string content = 1;
+	string from = 2;
+	string to = 3;
+	string subject = 4;
+	_Json args = 5;
+}
+message SendEmailWithTemplateReply {
+	bool success = 1;
+}

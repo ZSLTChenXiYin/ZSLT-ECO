@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"periodic-task/internal/conf"
+	"email/internal/conf"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
@@ -26,7 +26,7 @@ var (
 	Version string
 	// flagconf is the config flag.
 	flagconf string
-
+	// ID is the version of the compiled software.
 	id string
 )
 
@@ -76,7 +76,7 @@ func main() {
 		panic(err)
 	}
 
-	app, cleanup, err := wireApp(bc.Server, bc.Data, logger, bc.Registry)
+	app, cleanup, err := wireApp(bc.Server, bc.Data, logger, bc.Registry, bc.Email)
 	if err != nil {
 		panic(err)
 	}

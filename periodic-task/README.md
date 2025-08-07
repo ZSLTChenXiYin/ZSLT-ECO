@@ -32,10 +32,10 @@
 
 ## 构建服务
 ```bash
-go build -ldflags "-s -w -X main.Name=periodic-task -X main.Version=1.0.0 -X main.Build=$(date +%Y%m%d)" -o periodic-task ./cmd/periodic-task
+go build -ldflags "-s -w -X main.Name=periodic-task -X main.Version=1.0.0 -X main.Build=$(date +%Y%m%d) -X 'main.id=periodictask-ChenXiYin-$(date +%s)'" -o periodictask ./cmd/periodic-task
 ```
 
 ## 运行服务
 ```bash
-./periodic-task -conf ./configs/config.yaml
+./periodictask -conf ./configs/config.yaml
 ```
