@@ -26,7 +26,7 @@ var (
 	Version string
 	// flagconf is the config flag.
 	flagconf string
-	// ID is the version of the compiled software.
+	// id is the version of the compiled software.
 	id string
 )
 
